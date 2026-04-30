@@ -6,26 +6,35 @@ class Solution:
         else:
             maior = str2
             menor = str1
-            
-        while len(maior)%len(menor) != 0:
-            menor = menor[:len(menor)-len(maior)%len(menor)]
-        tem = 1
-        for n in range(1,len(menor)):
-            if menor[n] == menor[n]:
-                tem += 1
-        if tem == len(menor):
-            return ""
-        temp = ""
-        for n in range(0,len(maior),len(menor)):
-            if(maior[n:len(menor)+n] == menor):
-                temp += menor
-        if temp == maior:
-            return menor
+        
+        mdc = 1
+        nmaior = len(maior)
+        nmenor = len(menor)
+        i = 2
+        if nmaior % nmenor == 0:
+            mdc = nmenor
         else:
-            return ""
+            while i <= nmenor:
+                if nmaior%i == 0 and nmenor%i == 0:
+                    mdc *= i
+                    nmaior = nmaior//i
+                    nmenor = nmenor//i
+                    i = 2
+                i+=1
+        t = menor[:mdc]
+        s = ""
+        while len(s) < len(maior):
+            s += t
+            if len(s) == len(menor):
+                if s != menor:
+                    return ""
+            if len(s) == len(maior):
+                if s != maior:
+                    return ""
+        return t
 
-print(Solution.gcdOfStrings(Solution,"AAAAAAAAA", "AAACCC"))
-
+print(Solution.gcdOfStrings(Solution,"RGOAQOBGJRGOAQOBGJRGOAQOBGJRGOAQOBGJRGOAQOBGJ", "RGOAQOBGJRGOAQOBGJRGOAQOBGJRGOAQOBGJRGOAQOBGJRGOAQOBGJRGOAQOBGJRGOAQOBGJRGOAQOBGJ"))
+#NLZGMNLZGMNLZGMNLZGMNLZGMNLZGMNLZGMNLZGM NLZGMNLZGMNLZGMNLZGMNLZGMNLZGMNLZGMNLZGMNLZGM
 # str1,str2 = "ABABAB", "ABAB"
 # str2 = str2[:len(str2)-len(str1)%len(str2)]
 # print(len(str1)%len(str2))
