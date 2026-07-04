@@ -19,4 +19,3 @@ class Solution:
 s = Solution()
 s.productExceptSelf([-1, 1, 0, -3, 3])
 print(s)
-print("teste")
